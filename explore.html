@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore Yourself | NextStep</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            NextStep
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/explore">Explore</a>
+            <a href="/paths">Education Paths</a>
+            <a href="/careers">Careers</a>
+            <a href="/questions">Questions</a>
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         INTRO
+    ========================== -->
+
+    <section class="questionnaire-section">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                LET'S GET TO KNOW YOU
+            </p>
+
+            <h1>
+                Find your NextStep 🧭
+            </h1>
+
+            <p>
+                There are no right or wrong answers.
+                Just choose what feels most like you.
+            </p>
+
+            <p>
+                Your answers will help us find education paths
+                and areas worth exploring.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             PROGRESS
+        ========================== -->
+
+        <div class="progress-container">
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <p id="progressText">
+                Question 1 of 5
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             QUESTIONS
+        ========================== -->
+
+        <div class="questions-container">
+
+
+            <!-- QUESTION 1 -->
+
+            <div class="question active" data-question="1">
+
+                <h2>
+                    1. What are you naturally interested in?
+                </h2>
+
+                <p class="question-subtitle">
+                    Choose as many as you want.
+                </p>
+
+
+                <div class="interest-grid">
+
+                    <button class="interest-option" data-area="technology">
+                        💻 Technology
+                    </button>
+
+                    <button class="interest-option" data-area="science">
+                        🔬 Science
+                    </button>
+
+                    <button class="interest-option" data-area="business">
+                        💼 Business
+                    </button>
+
+                    <button class="interest-option" data-area="creative">
+                        🎨 Art & Design
+                    </button>
+
+                    <button class="interest-option" data-area="people">
+                        🤝 Helping People
+                    </button>
+
+                    <button class="interest-option" data-area="communication">
+                        🗣️ Communication
+                    </button>
+
+                    <button class="interest-option" data-area="building">
+                        🛠️ Building & Making
+                    </button>
+
+                    <button class="interest-option" data-area="society">
+                        🌍 Society & People
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION 2 -->
+
+            <div class="question" data-question="2">
+
+                <h2>
+                    2. Which subjects or topics do you enjoy?
+                </h2>
+
+                <p class="question-subtitle">
+                    Pick the ones you enjoy or want to learn more about.
+                </p>
+
+
+                <div class="interest-grid">
+
+                    <button class="interest-option" data-area="maths">
+                        ➗ Mathematics
+                    </button>
+
+                    <button class="interest-option" data-area="science">
+                        🧪 Science
+                    </button>
+
+                    <button class="interest-option" data-area="computer">
+                        💻 Computers
+                    </button>
+
+                    <button class="interest-option" data-area="business">
+                        📊 Economics / Business
+                    </button>
+
+                    <button class="interest-option" data-area="language">
+                        📖 Languages
+                    </button>
+
+                    <button class="interest-option" data-area="social">
+                        🌎 Social Studies
+                    </button>
+
+                    <button class="interest-option" data-area="creative">
+                        ✏️ Art / Design
+                    </button>
+
+                    <button class="interest-option" data-area="practical">
+                        🔧 Practical Work
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION 3 -->
+
+            <div class="question" data-question="3">
+
+                <h2>
+                    3. How do you like to work?
+                </h2>
+
+                <p class="question-subtitle">
+                    Choose the work styles that sound interesting to you.
+                </p>
+
+
+                <div class="interest-grid">
+
+                    <button class="interest-option" data-area="problem">
+                        🧩 Solving Problems
+                    </button>
+
+                    <button class="interest-option" data-area="building">
+                        🔨 Building Things
+                    </button>
+
+                    <button class="interest-option" data-area="people">
+                        👥 Working With People
+                    </button>
+
+                    <button class="interest-option" data-area="creative">
+                        🎨 Creating Things
+                    </button>
+
+                    <button class="interest-option" data-area="analysis">
+                        📈 Analyzing Information
+                    </button>
+
+                    <button class="interest-option" data-area="communication">
+                        🎤 Speaking / Explaining
+                    </button>
+
+                    <button class="interest-option" data-area="independent">
+                        🧠 Working Independently
+                    </button>
+
+                    <button class="interest-option" data-area="practical">
+                        🔧 Hands-on Work
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION 4 -->
+
+            <div class="question" data-question="4">
+
+                <h2>
+                    4. Which possibilities sound exciting?
+                </h2>
+
+                <p class="question-subtitle">
+                    You don't have to be sure. Pick anything that interests you.
+                </p>
+
+
+                <div class="interest-grid">
+
+                    <button class="interest-option" data-area="engineering">
+                        ⚙️ Engineering
+                    </button>
+
+                    <button class="interest-option" data-area="technology">
+                        💻 Technology
+                    </button>
+
+                    <button class="interest-option" data-area="medicine">
+                        🩺 Healthcare
+                    </button>
+
+                    <button class="interest-option" data-area="business">
+                        🚀 Business
+                    </button>
+
+                    <button class="interest-option" data-area="design">
+                        🎨 Design
+                    </button>
+
+                    <button class="interest-option" data-area="law">
+                        ⚖️ Law
+                    </button>
+
+                    <button class="interest-option" data-area="media">
+                        🎬 Media
+                    </button>
+
+                    <button class="interest-option" data-area="education">
+                        📚 Education
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION 5 -->
+
+            <div class="question" data-question="5">
+
+                <h2>
+                    5. What would you like to learn?
+                </h2>
+
+                <p class="question-subtitle">
+                    Think about skills you'd enjoy developing.
+                </p>
+
+
+                <div class="interest-grid">
+
+                    <button class="interest-option" data-area="coding">
+                        👨‍💻 Coding
+                    </button>
+
+                    <button class="interest-option" data-area="communication">
+                        🗣️ Communication
+                    </button>
+
+                    <button class="interest-option" data-area="design">
+                        🎨 Design
+                    </button>
+
+                    <button class="interest-option" data-area="business">
+                        💰 Business & Money
+                    </button>
+
+                    <button class="interest-option" data-area="research">
+                        🔎 Research
+                    </button>
+
+                    <button class="interest-option" data-area="technical">
+                        🔧 Technical Skills
+                    </button>
+
+                    <button class="interest-option" data-area="leadership">
+                        🌟 Leadership
+                    </button>
+
+                    <button class="interest-option" data-area="creative">
+                        ✨ Creative Skills
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 NAVIGATION
+            ========================== -->
+
+            <div class="question-navigation">
+
+                <button
+                    id="backButton"
+                    class="secondary-question-button"
+                    type="button">
+                    ← Back
+                </button>
+
+                <button
+                    id="nextButton"
+                    class="primary-button"
+                    type="button">
+                    Next →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             RESULTS
+        ========================== -->
+
+        <div
+            id="resultsSection"
+            class="results-section"
+            style="display: none;">
+
+            <div class="section-heading">
+
+                <p class="section-label">
+                    YOUR NEXTSTEP
+                </p>
+
+                <h1>
+                    Here's what your answers suggest 🌱
+                </h1>
+
+                <p>
+                    These aren't predictions or fixed decisions.
+                    They are paths and areas that may be worth exploring
+                    based on what you selected.
+                </p>
+
+            </div>
+
+
+            <!-- TOP AREAS -->
+
+            <div class="results-card">
+
+                <h2>
+                    🎯 Areas Worth Exploring
+                </h2>
+
+                <div
+                    id="topAreas"
+                    class="results-grid">
+                </div>
+
+            </div>
+
+
+            <!-- ROADMAP -->
+
+            <div class="results-card">
+
+                <h2>
+                    🗺️ A Possible Roadmap
+                </h2>
+
+                <div id="roadmap"></div>
+
+            </div>
+
+
+            <!-- ALTERNATIVES -->
+
+            <div class="results-card">
+
+                <h2>
+                    🔄 You Have Other Routes Too
+                </h2>
+
+                <p id="alternatives"></p>
+
+            </div>
+
+
+            <!-- SKILLS -->
+
+            <div class="results-card">
+
+                <h2>
+                    📚 Skills You Could Start Building
+                </h2>
+
+                <div
+                    id="skills"
+                    class="results-grid">
+                </div>
+
+            </div>
+
+
+            <!-- THIS WEEK -->
+
+            <div class="results-card">
+
+                <h2>
+                    ✅ Your Next 3 Steps
+                </h2>
+
+                <div id="nextSteps"></div>
+
+            </div>
+
+
+            <!-- DISCLAIMER -->
+
+            <div class="results-note">
+
+                <strong>Remember:</strong>
+
+                <p>
+                    Your answers don't decide your future.
+                    Interests change, new things can become interesting,
+                    and there are often multiple ways to reach the same goal.
+                </p>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="results-buttons">
+
+                <a href="/paths" class="primary-button">
+                    Explore Education Paths →
+                </a>
+
+                <a href="/careers" class="secondary-button">
+                    Explore Careers
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        let currentQuestion = 1;
+        const totalQuestions = 5;
+
+        const answers = {
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: []
+        };
+
+
+        /*
+        ========================================
+        QUESTION SELECTION
+        ========================================
+        */
+
+        const options = document.querySelectorAll(".interest-option");
+
+        options.forEach(option => {
+
+            option.addEventListener("click", function () {
+
+                this.classList.toggle("selected");
+
+                const question =
+                    this.closest(".question").dataset.question;
+
+                const area = this.dataset.area;
+
+                if (this.classList.contains("selected")) {
+
+                    if (!answers[question].includes(area)) {
+                        answers[question].push(area);
+                    }
+
+                } else {
+
+                    answers[question] =
+                        answers[question].filter(item => item !== area);
+
+                }
+
+            });
+
+        });
+
+
+        /*
+        ========================================
+        SHOW QUESTION
+        ========================================
+        */
+
+        function showQuestion(number) {
+
+            document.querySelectorAll(".question").forEach(question => {
+                question.classList.remove("active");
+            });
+
+            const selectedQuestion =
+                document.querySelector(
+                    `.question[data-question="${number}"]`
+                );
+
+            selectedQuestion.classList.add("active");
+
+            updateProgress();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        /*
+        ========================================
+        PROGRESS
+        ========================================
+        */
+
+        function updateProgress() {
+
+            const percentage =
+                (currentQuestion / totalQuestions) * 100;
+
+            document.getElementById("progressFill").style.width =
+                percentage + "%";
+
+            document.getElementById("progressText").textContent =
+                `Question ${currentQuestion} of ${totalQuestions}`;
+
+        }
+
+
+        /*
+        ========================================
+        BACK BUTTON
+        ========================================
+        */
+
+        document
+            .getElementById("backButton")
+            .addEventListener("click", function () {
+
+                if (currentQuestion > 1) {
+
+                    currentQuestion--;
+
+                    showQuestion(currentQuestion);
+
+                }
+
+            });
+
+
+        /*
+        ========================================
+        NEXT BUTTON
+        ========================================
+        */
+
+        document
+            .getElementById("nextButton")
+            .addEventListener("click", function () {
+
+                if (answers[currentQuestion].length === 0) {
+
+                    alert(
+                        "Choose at least one option before continuing."
+                    );
+
+                    return;
+                }
+
+
+                if (currentQuestion < totalQuestions) {
+
+                    currentQuestion++;
+
+                    showQuestion(currentQuestion);
+
+                } else {
+
+                    showResults();
+
+                }
+
+            });
+
+
+        /*
+        ========================================
+        ANALYSIS ENGINE
+        ========================================
+        */
+
+        function analyseAnswers() {
+
+            const scores = {
+
+                science: 0,
+                technology: 0,
+                commerce: 0,
+                arts: 0,
+                diploma: 0,
+                business: 0,
+                healthcare: 0,
+                creative: 0,
+                social: 0
+
+            };
+
+
+            /*
+            ------------------------------------
+            SCIENCE
+            ------------------------------------
+            */
+
+            const scienceSignals = [
+                "science",
+                "maths",
+                "problem",
+                "analysis",
+                "research",
+                "medicine",
+                "engineering"
+            ];
+
+            scienceSignals.forEach(signal => {
+
+                Object.values(answers).forEach(questionAnswers => {
+
+                    if (questionAnswers.includes(signal)) {
+                        scores.science++;
+                    }
+
+                });
+
+            });
+
+
+            /*
+            ------------------------------------
+            TECHNOLOGY
+            ------------------------------------
+            */
+
+            const technologySignals = [
+                "technology",
+                "computer",
+                "coding",
+                "technical",
+                "problem",
+                "maths",
+                "engineering",
+                "analysis"
+            ];
+
+            technologySignals.forEach(signal => {
+
+                Object.values(answers).forEach(questionAnswers => {
+
+                    if (questionAnswers.includes(signal)) {
+                        scores.technology++;
+                    }
+
+                });
+
+            });
+
+
+            /*
+            ------------------------------------
+            COMMERCE
+            ------------------------------------
+            */
+
+            const commerceSignals = [
+                "business",
+                "money",
+                "analysis",
+                "maths",
+                "communication",
+                "leadership"
+            ];
+
+            commerceSignals.forEach(signal => {
+
+                Object.values(answers).forEach(questionAnswers => {
+
+                    if (questionAnswers.includes(signal)) {
+                        scores.commerce++;
+                    }
+
+                });
+
+            });
+
+
+            /*
+            ------------------------------------
+            BUSINESS
+            ------------------------------------
+            */
+
+            const businessSignals = [
+                "business",
+                "leadership",
+                "communication",
+                "money",
+                "people"
+            ];
+
+            businessSignals.forEach(signal => {
+
+                Object.values(answers).forEach(questionAnswers => {
+
+                    if (questionAnswers.includes(signal)) {
+                        scores.business++;
+                    }
+
+                });
+
+            });
+
+
+            /*
+            ------------------------------------
+            CREATIVE
+            ------------------------------------
+            */
+
+            const creativeSignals = [
+                "creative",
+                "design",
+                "art",
+                "media",
+                "communication"
+            ];
+
+            creativeSignals.forEach(signal => {
+
+                Object.values(answers).forEach(questionAnswers => {
+
+                    if (questionAnswers.includes(signal)) {
+                        scores.creative++;
+                    }
+
+                });
+
+            });
+
+
+            /*
+            ------------------------------------
+            ARTS
+            ------------------------------------
+            */
+
+            const artsSignals = [
+                "creative",
+                "language",
+                "social",
+                "society",
+                "communication",
+                "law",
+                "media",
+                "education"
+            ];
+
+            artsSignals.forEach(signal => {
+
+                Object.values(answers).forEach(questionAnswers => {
+
+                    if (questionAnswers.includes(signal)) {
+                        scores.arts++;
+                    }
+
+                });
+
+            });
+
+
+            /*
+            ------------------------------------
+            DIPLOMA
+            ------------------------------------
+            */
+
+            const diplomaSignals = [
+                "building",
+                "practical",
+                "technical",
+                "building",
+                "hands-on",
+                "engineering"
+            ];
+
+            diplomaSignals.forEach(signal => {
+
+                Object.values(answers).forEach(questionAnswers => {
+
+                    if (questionAnswers.includes(signal)) {
+                        scores.diploma++;
+                    }
+
+                });
+
+            });
+
+
+            /*
+            ------------------------------------
+            HEALTHCARE
+            ------------------------------------
+            */
+
+            const healthcareSignals = [
+                "medicine",
+                "science",
+                "people",
+                "helping",
+                "research"
+            ];
+
+            healthcareSignals.forEach(signal => {
+
+                Object.values(answers).forEach(questionAnswers => {
+
+                    if (questionAnswers.includes(signal)) {
+                        scores.healthcare++;
+                    }
+
+                });
+
+            });
+
+
+            /*
+            ------------------------------------
+            SOCIAL
+            ------------------------------------
+            */
+
+            const socialSignals = [
+                "people",
+                "communication",
+                "society",
+                "social",
+                "education",
+                "helping",
+                "law"
+            ];
+
+            socialSignals.forEach(signal => {
+
+                Object.values(answers).forEach(questionAnswers => {
+
+                    if (questionAnswers.includes(signal)) {
+                        scores.social++;
+                    }
+
+                });
+
+            });
+
+
+            return scores;
+
+        }
+
+
+        /*
+        ========================================
+        PATH INFORMATION
+        ========================================
+        */
+
+        const pathInformation = {
+
+            science: {
+                title: "Science",
+                icon: "🔬",
+                description:
+                    "A route worth exploring if you enjoy science, mathematics, investigation or technical problem-solving.",
+                roadmap:
+                    "10th → 11th/12th Science → Further study → Projects & practical learning → Career exploration",
+                skills: [
+                    "Mathematics",
+                    "Scientific thinking",
+                    "Problem solving"
+                ]
+            },
+
+            technology: {
+                title: "Technology & Engineering",
+                icon: "💻",
+                description:
+                    "A broad area to explore if you enjoy computers, technology, mathematics, coding or solving problems.",
+                roadmap:
+                    "10th → Science or Diploma route → Technical learning → Projects → Further study → Career exploration",
+                skills: [
+                    "Coding",
+                    "Problem solving",
+                    "Computer skills"
+                ]
+            },
+
+            commerce: {
+                title: "Commerce",
+                icon: "📊",
+                description:
+                    "A route worth exploring if you enjoy business, numbers, economics, money or analysing information.",
+                roadmap:
+                    "10th → 11th/12th Commerce → Further study → Practical projects → Career exploration",
+                skills: [
+                    "Financial basics",
+                    "Excel / spreadsheets",
+                    "Communication"
+                ]
+            },
+
+            business: {
+                title: "Business & Entrepreneurship",
+                icon: "🚀",
+                description:
+                    "An area to explore if you enjoy business ideas, communication, people, leadership or understanding customers.",
+                roadmap:
+                    "10th → Explore business basics → Small projects → Learn money & marketing → Further education → Experience when eligible",
+                skills: [
+                    "Communication",
+                    "Money basics",
+                    "Marketing",
+                    "Customer understanding"
+                ]
+            },
+
+            arts: {
+                title: "Arts & Humanities",
+                icon: "🎨",
+                description:
+                    "A route worth exploring if you enjoy people, society, languages, communication, creativity or ideas.",
+                roadmap:
+                    "10th → 11th/12th Arts or Humanities → Further study → Projects / activities → Career exploration",
+                skills: [
+                    "Writing",
+                    "Communication",
+                    "Research"
+                ]
+            },
+
+            creative: {
+                title: "Creative & Design",
+                icon: "✨",
+                description:
+                    "An area to explore if you enjoy creating, designing, visual communication, media or creative problem-solving.",
+                roadmap:
+                    "10th → Explore creative skills → Build projects → Further study / specialised learning → Portfolio → Career exploration",
+                skills: [
+                    "Design",
+                    "Creative thinking",
+                    "Visual communication"
+                ]
+            },
+
+            diploma: {
+                title: "Diploma / Technical Route",
+                icon: "🛠️",
+                description:
+                    "A practical route worth exploring if you enjoy hands-on work, technical subjects, building and making things.",
+                roadmap:
+                    "10th → Diploma / technical route → Practical learning → Projects → Further study or eligible experience → Career exploration",
+                skills: [
+                    "Technical skills",
+                    "Practical problem solving",
+                    "Tools & technology"
+                ]
+            },
+
+            healthcare: {
+                title: "Healthcare & Helping People",
+                icon: "🩺",
+                description:
+                    "An area to explore if you enjoy science and helping or working with people.",
+                roadmap:
+                    "10th → Relevant school subjects → Further education → Practical learning → Career exploration",
+                skills: [
+                    "Science",
+                    "Communication",
+                    "Care and responsibility"
+                ]
+            },
+
+            social: {
+                title: "People, Society & Communication",
+                icon: "🤝",
+                description:
+                    "An area to explore if you enjoy communication, society, helping people, education or understanding communities.",
+                roadmap:
+                    "10th → Relevant subjects → Further study → Projects / volunteering when appropriate → Career exploration",
+                skills: [
+                    "Communication",
+                    "Research",
+                    "Teamwork"
+                ]
+            }
+
+        };
+
+
+        /*
+        ========================================
+        FIND TOP AREAS
+        ========================================
+        */
+
+        function getTopAreas(scores) {
+
+            return Object.entries(scores)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 3);
+
+        }
+
+
+        /*
+        ========================================
+        CREATE RESULTS
+        ========================================
+        */
+
+        function showResults() {
+
+            const scores = analyseAnswers();
+
+            const topAreas = getTopAreas(scores);
+
+
+            document
+                .querySelector(".questions-container")
+                .style.display = "none";
+
+            document
+                .querySelector(".progress-container")
+                .style.display = "none";
+
+            document
+                .getElementById("resultsSection")
+                .style.display = "block";
+
+
+            /*
+            ------------------------------------
+            TOP AREAS
+            ------------------------------------
+            */
+
+            const topAreasContainer =
+                document.getElementById("topAreas");
+
+            topAreasContainer.innerHTML = "";
+
+
+            topAreas.forEach(([area, score]) => {
+
+                const info = pathInformation[area];
+
+                if (!info) return;
+
+                const card = document.createElement("div");
+
+                card.className = "result-card";
+
+                card.innerHTML = `
+
+                    <div class="result-icon">
+                        ${info.icon}
+                    </div>
+
+                    <h3>
+                        ${info.title}
+                    </h3>
+
+                    <p>
+                        ${info.description}
+                    </p>
+
+                    <span class="result-label">
+                        Worth exploring
+                    </span>
+
+                `;
+
+                topAreasContainer.appendChild(card);
+
+            });
+
+
+            /*
+            ------------------------------------
+            ROADMAP
+            ------------------------------------
+            */
+
+            const roadmapContainer =
+                document.getElementById("roadmap");
+
+            roadmapContainer.innerHTML = "";
+
+
+            if (topAreas.length > 0) {
+
+                const mainPath =
+                    pathInformation[topAreas[0][0]];
+
+                roadmapContainer.innerHTML = `
+
+                    <div class="roadmap-box">
+
+                        <div class="roadmap-icon">
+                            ${mainPath.icon}
+                        </div>
+
+                        <h3>
+                            ${mainPath.title}
+                        </h3>
+
+                        <p>
+                            ${mainPath.roadmap}
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /*
+            ------------------------------------
+            ALTERNATIVES
+            ------------------------------------
+            */
+
+            const alternatives =
+                document.getElementById("alternatives");
+
+
+            if (topAreas.length > 1) {
+
+                const alternativeNames =
+                    topAreas
+                        .slice(1)
+                        .map(([area]) => pathInformation[area].title)
+                        .join(", ");
+
+                alternatives.textContent =
+                    `Your answers also point toward ${alternativeNames}. `
+                    + `You don't need to choose one route immediately. `
+                    + `Comparing these options can help you understand `
+                    + `which environment feels right for you.`;
+
+            } else {
+
+                alternatives.textContent =
+                    "There are many possible routes. Explore different "
+                    + "education paths before making a decision.";
+
+            }
+
+
+            /*
+            ------------------------------------
+            SKILLS
+            ------------------------------------
+            */
+
+            const skillsContainer =
+                document.getElementById("skills");
+
+            skillsContainer.innerHTML = "";
+
+
+            const skillSet = new Set();
+
+
+            topAreas.forEach(([area]) => {
+
+                const info = pathInformation[area];
+
+                if (!info) return;
+
+                info.skills.forEach(skill => {
+                    skillSet.add(skill);
+                });
+
+            });
+
+
+            skillSet.forEach(skill => {
+
+                const skillCard =
+                    document.createElement("div");
+
+                skillCard.className = "result-card";
+
+                skillCard.innerHTML = `
+
+                    <div class="result-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        ${skill}
+                    </h3>
+
+                    <p>
+                        You can start exploring this skill gradually.
+                    </p>
+
+                `;
+
+                skillsContainer.appendChild(skillCard);
+
+            });
+
+
+            /*
+            ------------------------------------
+            NEXT 3 STEPS
+            ------------------------------------
+            */
+
+            const nextSteps =
+                document.getElementById("nextSteps");
+
+            nextSteps.innerHTML = `
+
+                <div class="next-step-item">
+                    <strong>1.</strong>
+                    Compare the education paths connected to
+                    your top areas.
+                </div>
+
+                <div class="next-step-item">
+                    <strong>2.</strong>
+                    Try one small project or activity related
+                    to your interests.
+                </div>
+
+                <div class="next-step-item">
+                    <strong>3.</strong>
+                    Explore at least two careers before deciding
+                    what you want to learn next.
+                </div>
+
+            `;
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /*
+        ========================================
+        INITIALISE
+        ========================================
+        */
+
+        updateProgress();
+
+    </script>
+
+
+</body>
+</html>

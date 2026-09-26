@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Questions Centre - NextStep</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        /* QUESTIONS PAGE */
+
+        .questions-hero {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .questions-hero h1 {
+            font-size: 48px;
+            margin: 15px 0;
+        }
+
+        .questions-hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .question-search {
+            padding: 20px;
+        }
+
+        .search-box {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 18px 55px 18px 20px;
+            border: 2px solid #ddd;
+            border-radius: 14px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #555;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        .question-categories {
+            padding: 20px;
+        }
+
+        .category-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .category-btn:hover {
+            background: #f1f1f1;
+        }
+
+        .category-btn.active {
+            background: #222;
+            color: white;
+            border-color: #222;
+        }
+
+        .questions-section {
+            padding: 40px 20px 80px;
+        }
+
+        .questions-list {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .question-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 14px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .question-button {
+            width: 100%;
+            border: none;
+            background: white;
+            padding: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .question-button:hover {
+            background: #f8f8f8;
+        }
+
+        .question-arrow {
+            font-size: 25px;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .question-answer {
+            display: none;
+            padding: 0 22px 22px;
+            line-height: 1.7;
+        }
+
+        .question-answer.open {
+            display: block;
+        }
+
+        .question-answer p {
+            margin: 10px 0;
+        }
+
+        .question-answer ul {
+            padding-left: 25px;
+        }
+
+        .question-answer a {
+            font-weight: 600;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .no-results-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .ask-question {
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .ask-box {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 45px 25px;
+            border-radius: 20px;
+            background: #f5f5f5;
+        }
+
+        .ask-icon {
+            font-size: 45px;
+        }
+
+        .ask-box h2 {
+            margin: 15px 0;
+        }
+
+        .ask-box p {
+            line-height: 1.7;
+        }
+
+        .question-message {
+            display: none;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+
+            .questions-hero h1 {
+                font-size: 36px;
+            }
+
+            .question-button {
+                padding: 18px;
+                font-size: 15px;
+            }
+
+            .question-answer {
+                padding: 0 18px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="/" class="logo">
+                Next<span>Step</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="/">Home</a>
+
+                <a href="/explore">
+                    Explore
+                </a>
+
+                <a href="/paths">
+                    Education Paths
+                </a>
+
+                <a href="/careers">
+                    Careers
+                </a>
+
+                <a href="/questions" class="active">
+                    Questions
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="questions-hero">
+
+        <div class="container">
+
+            <span class="section-label">
+                QUESTION CENTRE
+            </span>
+
+            <h1>
+                Have a Question?
+            </h1>
+
+            <p>
+                You're probably not the only student wondering about it.
+                Explore common questions about education, careers,
+                studying and the future.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <section class="question-search">
+
+        <div class="container">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="questionSearch"
+                    placeholder="Search a question..."
+                >
+
+                <span class="search-icon">
+                    🔍
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+
+    <section class="question-categories">
+
+        <div class="container">
+
+            <div class="category-buttons">
+
+                <button
+                    type="button"
+                    class="category-btn active"
+                    data-category="all">
+                    All
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="stream">
+                    Streams
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="career">
+                    Careers
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="study">
+                    Study
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="future">
+                    Future
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUESTIONS -->
+
+    <section class="questions-section">
+
+        <div class="container">
+
+            <div class="questions-list" id="questionsList">
+
+
+                <!-- 1 -->
+
+                <div class="question-item" data-category="stream">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            Which stream should I choose after 10th?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            There is no single stream that is right
+                            for every student.
+                        </p>
+
+                        <p>
+                            Start by considering the subjects you enjoy,
+                            your interests and the areas you want to explore.
+                        </p>
+
+                        <p>
+                            You can also try the
+                            <a href="/explore">Discovery questionnaire</a>
+                            to learn more about your interests.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 2 -->
+
+                <div class="question-item" data-category="stream">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            Is Science, Commerce or Arts better?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            These are different education routes,
+                            not a simple ranking.
+                        </p>
+
+                        <p>
+                            Each route includes different subjects
+                            and can connect to different areas of
+                            further education.
+                        </p>
+
+                        <p>
+                            Explore the
+                            <a href="/paths">Education Paths</a>
+                            page to learn about the differences.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 3 -->
+
+                <div class="question-item" data-category="career">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            How do I know which career is right for me?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            You don't have to know immediately.
+                        </p>
+
+                        <p>
+                            Try learning about different fields,
+                            asking questions and trying small projects
+                            related to areas that interest you.
+                        </p>
+
+                        <p>
+                            Exploring a career does not mean you have
+                            to choose it permanently.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 4 -->
+
+                <div class="question-item" data-category="study">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            What if my marks are not very good?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            Marks are one part of your education journey.
+                        </p>
+
+                        <p>
+                            Some courses have specific eligibility
+                            requirements, so it is important to check
+                            those requirements.
+                        </p>
+
+                        <p>
+                            You can also keep developing your skills,
+                            learning and improving your study habits.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 5 -->
+
+                <div class="question-item" data-category="future">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            What if I change my mind later?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            Changing your mind is a normal part of
+                            learning about yourself.
+                        </p>
+
+                        <p>
+                            Some education choices can affect which
+                            routes are available later, so understanding
+                            those connections is useful.
+                        </p>
+
+                        <p>
+                            You do not have to know your entire future
+                            right now.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 6 -->
+
+                <div class="question-item" data-category="study">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            How can I find what I'm interested in?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            Pay attention to the subjects, activities
+                            and problems that make you curious.
+                        </p>
+
+                        <p>
+                            You can also experiment by building,
+                            writing, researching or learning beginner
+                            skills in different areas.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 7 -->
+
+                <div class="question-item" data-category="career">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            How can I explore careers while I'm in school?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            Start with safe, age-appropriate exploration.
+                        </p>
+
+                        <p>
+                            Read about careers, use educational resources,
+                            talk with teachers or family members and try
+                            school-level projects.
+                        </p>
+
+                        <p>
+                            Visit the
+                            <a href="/careers">Career Explorer</a>
+                            to explore different fields.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 8 -->
+
+                <div class="question-item" data-category="future">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            Do I need to know my career at 15?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            No. You can start exploring without having
+                            a final career decision.
+                        </p>
+
+                        <p>
+                            At this stage, you can focus on understanding
+                            yourself and learning about your options.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 9 -->
+
+                <div class="question-item" data-category="stream">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            Can I explore engineering through a diploma?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            In some education systems, diploma routes
+                            can provide pathways toward further
+                            engineering education.
+                        </p>
+
+                        <p>
+                            Exact admission requirements depend on the
+                            institution, programme and current rules.
+                            Always check official requirements before
+                            making an education decision.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 10 -->
+
+                <div class="question-item" data-category="future">
+
+                    <button type="button" class="question-button">
+
+                        <span>
+                            What should I do right now?
+                        </span>
+
+                        <span class="question-arrow">
+                            +
+                        </span>
+
+                    </button>
+
+                    <div class="question-answer">
+
+                        <p>
+                            Start small.
+                        </p>
+
+                        <ul>
+                            <li>Understand your interests.</li>
+                            <li>Explore education paths.</li>
+                            <li>Learn about careers.</li>
+                            <li>Ask questions.</li>
+                            <li>Try a small project or new skill.</li>
+                        </ul>
+
+                        <p>
+                            You don't need to solve your entire future
+                            today. Focus on your next step.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- NO RESULTS -->
+
+            <div class="no-results" id="noResults">
+
+                <div class="no-results-icon">
+                    🔎
+                </div>
+
+                <h2>
+                    No questions found
+                </h2>
+
+                <p>
+                    Try another search or choose a different category.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ASK QUESTION -->
+
+    <section class="ask-question">
+
+        <div class="container">
+
+            <div class="ask-box">
+
+                <div class="ask-icon">
+                    💬
+                </div>
+
+                <h2>
+                    Didn't find your question?
+                </h2>
+
+                <p>
+                    Question submission can be added later.
+                    For now, explore the questions above or use
+                    the Discovery and Career pages.
+                </p>
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="askButton">
+
+                    Ask a Question
+
+                </button>
+
+                <p
+                    id="questionMessage"
+                    class="question-message">
+
+                    Question submission will be available
+                    in a future version.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-logo">
+                Next<span>Step</span>
+            </div>
+
+            <p>
+                You don't need to know your whole future.
+                You just need to know your next step.
+            </p>
+
+            <div class="footer-links">
+
+                <a href="/">Home</a>
+
+                <a href="/explore">
+                    Explore
+                </a>
+
+                <a href="/paths">
+                    Education Paths
+                </a>
+
+                <a href="/careers">
+                    Careers
+                </a>
+
+                <a href="/questions">
+                    Questions
+                </a>
+
+            </div>
+
+            <p class="footer-copy">
+                © 2026 NextStep. Built to help students explore their options.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const questionButtons =
+                document.querySelectorAll(".question-button");
+
+            const categoryButtons =
+                document.querySelectorAll(".category-btn");
+
+            const searchInput =
+                document.getElementById("questionSearch");
+
+            const questions =
+                document.querySelectorAll(".question-item");
+
+            const noResults =
+                document.getElementById("noResults");
+
+            const askButton =
+                document.getElementById("askButton");
+
+            const questionMessage =
+                document.getElementById("questionMessage");
+
+
+            /*
+             * OPEN / CLOSE QUESTIONS
+             */
+
+            questionButtons.forEach(function (button) {
+
+                button.addEventListener("click", function () {
+
+                    const answer =
+                        button.nextElementSibling;
+
+                    const arrow =
+                        button.querySelector(".question-arrow");
+
+                    const isOpen =
+                        answer.classList.contains("open");
+
+
+                    // Close every answer
+                    document.querySelectorAll(".question-answer")
+                        .forEach(function (item) {
+
+                            item.classList.remove("open");
+
+                        });
+
+
+                    // Reset every arrow
+                    document.querySelectorAll(".question-arrow")
+                        .forEach(function (item) {
+
+                            item.textContent = "+";
+
+                        });
+
+
+                    // Open clicked answer
+                    if (!isOpen) {
+
+                        answer.classList.add("open");
+
+                        arrow.textContent = "−";
+
+                    }
+
+                });
+
+            });
+
+
+            /*
+             * CATEGORY FILTER
+             */
+
+            categoryButtons.forEach(function (button) {
+
+                button.addEventListener("click", function () {
+
+                    const selectedCategory =
+                        button.dataset.category;
+
+
+                    // Clear search
+                    searchInput.value = "";
+
+
+                    // Active button
+                    categoryButtons.forEach(function (item) {
+
+                        item.classList.remove("active");
+
+                    });
+
+                    button.classList.add("active");
+
+
+                    let visibleCount = 0;
+
+
+                    questions.forEach(function (question) {
+
+                        const questionCategory =
+                            question.dataset.category;
+
+
+                        if (
+                            selectedCategory === "all" ||
+                            questionCategory === selectedCategory
+                        ) {
+
+                            question.style.display = "block";
+
+                            visibleCount++;
+
+                        } else {
+
+                            question.style.display = "none";
+
+                        }
+
+                    });
+
+
+                    if (visibleCount === 0) {
+
+                        noResults.style.display = "block";
+
+                    } else {
+
+                        noResults.style.display = "none";
+
+                    }
+
+                });
+
+            });
+
+
+            /*
+             * SEARCH
+             */
+
+            searchInput.addEventListener("input", function () {
+
+                const searchText =
+                    searchInput.value.toLowerCase().trim();
+
+
+                let visibleCount = 0;
+
+
+                questions.forEach(function (question) {
+
+                    const questionText =
+                        question.textContent.toLowerCase();
+
+
+                    if (
+                        searchText === "" ||
+                        questionText.includes(searchText)
+                    ) {
+
+                        question.style.display = "block";
+
+                        visibleCount++;
+
+                    } else {
+
+                        question.style.display = "none";
+
+                    }
+
+                });
+
+
+                // Set All category active while searching
+                categoryButtons.forEach(function (button) {
+
+                    button.classList.remove("active");
+
+                });
+
+                categoryButtons[0].classList.add("active");
+
+
+                if (visibleCount === 0) {
+
+                    noResults.style.display = "block";
+
+                } else {
+
+                    noResults.style.display = "none";
+
+                }
+
+            });
+
+
+            /*
+             * ASK QUESTION BUTTON
+             */
+
+            askButton.addEventListener("click", function () {
+
+                questionMessage.style.display = "block";
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

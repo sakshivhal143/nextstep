@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Paths | NextStep</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .path-tools {
+            max-width: 900px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .path-search {
+            width: 100%;
+            padding: 15px 18px;
+            border: 1px solid #d8dce5;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 18px;
+        }
+
+        .path-search:focus {
+            border-color: #4f46e5;
+        }
+
+        .path-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .path-filter {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            background: #eef0f6;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .path-filter:hover,
+        .path-filter.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .interactive-paths {
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .path-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .interactive-path-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .interactive-path-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .interactive-path-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .path-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 12px;
+            background: #eef0f6;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .path-details {
+            display: none;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid #eee;
+        }
+
+        .interactive-path-card.open .path-details {
+            display: block;
+        }
+
+        .path-details h4 {
+            margin-top: 15px;
+            margin-bottom: 7px;
+        }
+
+        .path-details ul {
+            padding-left: 20px;
+        }
+
+        .path-details li {
+            margin-bottom: 6px;
+        }
+
+        .path-action {
+            margin-top: 18px;
+            font-weight: 600;
+            color: #4f46e5;
+        }
+
+        .no-paths {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .change-section {
+            max-width: 1000px;
+            margin: 70px auto;
+            text-align: center;
+            padding: 40px 25px;
+            border-radius: 18px;
+            background: #f5f6ff;
+        }
+
+        @media (max-width: 850px) {
+            .path-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .path-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="nav-logo">NextStep</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/explore">Explore</a>
+        <a href="/paths" class="active">Education Paths</a>
+        <a href="/careers">Careers</a>
+        <a href="/questions">Questions</a>
+    </div>
+</nav>
+
+<section class="page-hero">
+    <h1>Explore Education Paths</h1>
+    <p>
+        There isn't one correct route after 10th.
+        Explore different options and see where each one can lead.
+    </p>
+</section>
+
+<section class="page-intro">
+    <h2>Find a path that interests you</h2>
+    <p>
+        Search or filter the options below. Open a card to learn about
+        subjects, possible routes and things you can explore.
+    </p>
+</section>
+
+<section class="path-tools">
+
+    <input
+        type="text"
+        id="pathSearch"
+        class="path-search"
+        placeholder="Search paths... e.g. science, diploma, design"
+    >
+
+    <div class="path-filters">
+        <button class="path-filter active" data-filter="all">All</button>
+        <button class="path-filter" data-filter="academic">Academic</button>
+        <button class="path-filter" data-filter="technical">Technical</button>
+        <button class="path-filter" data-filter="creative">Creative</button>
+        <button class="path-filter" data-filter="business">Business</button>
+        <button class="path-filter" data-filter="health">Health</button>
+    </div>
+
+</section>
+
+<section class="interactive-paths">
+
+    <div class="path-grid" id="pathGrid">
+
+        <div class="interactive-path-card"
+             data-category="academic"
+             data-search="science physics chemistry maths biology engineering medicine research">
+
+            <span class="path-tag">Academic</span>
+            <h3>🔬 Science</h3>
+
+            <p>
+                Explore science, mathematics and technology-related subjects.
+            </p>
+
+            <div class="path-action">Explore Path →</div>
+
+            <div class="path-details">
+
+                <h4>What can you study?</h4>
+                <ul>
+                    <li>Physics</li>
+                    <li>Chemistry</li>
+                    <li>Mathematics</li>
+                    <li>Biology</li>
+                    <li>Computer-related subjects</li>
+                </ul>
+
+                <h4>Possible routes</h4>
+                <p>
+                    10th → 11th/12th → College or professional course
+                </p>
+
+                <h4>Where could it connect?</h4>
+                <p>
+                    Engineering, medicine, science, technology, research
+                    and many other fields.
+                </p>
+
+                <h4>Try now</h4>
+                <p>
+                    Explore a science topic, solve a few problems, or try
+                    a beginner coding/science project.
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="interactive-path-card"
+             data-category="technical"
+             data-search="diploma polytechnic technical engineering practical skills computer mechanical electrical">
+
+            <span class="path-tag">Technical</span>
+            <h3>🛠️ Diploma / Polytechnic</h3>
+
+            <p>
+                A more practical and technical route after 10th.
+            </p>
+
+            <div class="path-action">Explore Path →</div>
+
+            <div class="path-details">
+
+                <h4>What is it?</h4>
+                <p>
+                    Diploma programs can provide practical and technical
+                    learning in different engineering and technology areas.
+                </p>
+
+                <h4>Possible areas</h4>
+                <ul>
+                    <li>Computer Engineering</li>
+                    <li>Mechanical Engineering</li>
+                    <li>Electrical Engineering</li>
+                    <li>Civil Engineering</li>
+                    <li>Electronics</li>
+                </ul>
+
+                <h4>Possible route</h4>
+                <p>
+                    10th → Diploma → Further study / degree opportunities
+                    depending on the course and rules.
+                </p>
+
+                <h4>Try now</h4>
+                <p>
+                    Build something simple, experiment with electronics,
+                    learn basic programming or explore how machines work.
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="interactive-path-card"
+             data-category="business"
+             data-search="commerce accounting economics finance business banking management">
+
+            <span class="path-tag">Business</span>
+            <h3>💼 Commerce</h3>
+
+            <p>
+                Explore money, business, economics and financial concepts.
+            </p>
+
+            <div class="path-action">Explore Path →</div>
+
+            <div class="path-details">
+
+                <h4>Possible subjects</h4>
+                <ul>
+                    <li>Accountancy</li>
+                    <li>Economics</li>
+                    <li>Business Studies</li>
+                    <li>Mathematics</li>
+                </ul>
+
+                <h4>Possible directions</h4>
+                <p>
+                    Finance, accounting, business, economics, management
+                    and related fields.
+                </p>
+
+                <h4>Try now</h4>
+                <p>
+                    Learn basic budgeting, understand how a business works,
+                    or explore simple financial concepts.
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="interactive-path-card"
+             data-category="creative"
+             data-search="arts humanities history geography psychology sociology literature design creative writing">
+
+            <span class="path-tag">Creative & Humanities</span>
+            <h3>📚 Arts & Humanities</h3>
+
+            <p>
+                Explore people, society, history, language and ideas.
+            </p>
+
+            <div class="path-action">Explore Path →</div>
+
+            <div class="path-details">
+
+                <h4>Possible subjects</h4>
+                <ul>
+                    <li>History</li>
+                    <li>Geography</li>
+                    <li>Political Science</li>
+                    <li>Psychology</li>
+                    <li>Sociology</li>
+                    <li>Languages and literature</li>
+                </ul>
+
+                <h4>Possible directions</h4>
+                <p>
+                    Education, law, communication, social sciences,
+                    public service and many other areas.
+                </p>
+
+                <h4>Try now</h4>
+                <p>
+                    Read about a historical event, write an article,
+                    explore psychology or investigate a social issue.
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="interactive-path-card"
+             data-category="creative"
+             data-search="design graphic ui ux animation photography video art fashion creative">
+
+            <span class="path-tag">Creative</span>
+            <h3>🎨 Creative & Design</h3>
+
+            <p>
+                Explore visual design, creativity, digital media and art.
+            </p>
+
+            <div class="path-action">Explore Path →</div>
+
+            <div class="path-details">
+
+                <h4>Possible areas</h4>
+                <ul>
+                    <li>Graphic Design</li>
+                    <li>UI/UX Design</li>
+                    <li>Animation</li>
+                    <li>Photography</li>
+                    <li>Video and media</li>
+                    <li>Fashion and product design</li>
+                </ul>
+
+                <h4>Skills to explore</h4>
+                <p>
+                    Visual communication, creativity, observation,
+                    digital tools and problem-solving.
+                </p>
+
+                <h4>Try now</h4>
+                <p>
+                    Create a poster, redesign a simple webpage,
+                    make a small illustration or try a beginner
+                    design tool.
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="interactive-path-card"
+             data-category="health"
+             data-search="healthcare medicine biology nursing pharmacy physiotherapy health">
+
+            <span class="path-tag">Health</span>
+            <h3>🩺 Healthcare</h3>
+
+            <p>
+                Explore health, biology and different healthcare-related
+                education routes.
+            </p>
+
+            <div class="path-action">Explore Path →</div>
+
+            <div class="path-details">
+
+                <h4>Possible areas</h4>
+                <ul>
+                    <li>Medicine</li>
+                    <li>Nursing</li>
+                    <li>Pharmacy</li>
+                    <li>Physiotherapy</li>
+                    <li>Healthcare technology</li>
+                </ul>
+
+                <h4>Important</h4>
+                <p>
+                    Healthcare careers can have specific education,
+                    entrance and professional requirements. These vary
+                    by course and location.
+                </p>
+
+                <h4>Try now</h4>
+                <p>
+                    Explore human biology, learn about how the body works,
+                    or research different healthcare professions.
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="interactive-path-card"
+             data-category="business"
+             data-search="business entrepreneurship startup entrepreneur marketing management leadership">
+
+            <span class="path-tag">Business</span>
+            <h3>🚀 Business & Entrepreneurship</h3>
+
+            <p>
+                Learn how ideas become products, services and businesses.
+            </p>
+
+            <div class="path-action">Explore Path →</div>
+
+            <div class="path-details">
+
+                <h4>What can you explore?</h4>
+                <ul>
+                    <li>Marketing</li>
+                    <li>Business models</li>
+                    <li>Finance basics</li>
+                    <li>Leadership</li>
+                    <li>Product ideas</li>
+                </ul>
+
+                <h4>Start small</h4>
+                <p>
+                    At your age, entrepreneurship can begin as learning:
+                    identify a problem, design a solution and create a
+                    simple project around it.
+                </p>
+
+                <h4>Try now</h4>
+                <p>
+                    Pick an everyday problem and sketch an idea that
+                    could make it easier.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="no-paths" id="noPaths">
+        <h3>No paths found</h3>
+        <p>Try another search term or choose a different category.</p>
+    </div>
+
+</section>
+
+
+<section class="change-section">
+
+    <h2>What if I change my mind?</h2>
+
+    <p>
+        Choosing a path now does not mean your entire future is fixed.
+        Many education routes connect to other options later.
+    </p>
+
+    <br>
+
+    <a href="/explore" class="btn btn-primary">
+        Revisit Your Interests
+    </a>
+
+</section>
+
+
+<footer class="footer">
+    <p>© 2026 NextStep — Your future starts with your next step.</p>
+</footer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cards = document.querySelectorAll(".interactive-path-card");
+    const filters = document.querySelectorAll(".path-filter");
+    const searchInput = document.getElementById("pathSearch");
+    const noPaths = document.getElementById("noPaths");
+
+    let currentFilter = "all";
+
+    function filterPaths() {
+
+        const searchText = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        cards.forEach(function (card) {
+
+            const category = card.dataset.category;
+            const searchableText = card.dataset.search.toLowerCase();
+
+            const categoryMatch =
+                currentFilter === "all" ||
+                category === currentFilter;
+
+            const searchMatch =
+                searchText === "" ||
+                searchableText.includes(searchText);
+
+            if (categoryMatch && searchMatch) {
+                card.style.display = "block";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+                card.classList.remove("open");
+            }
+        });
+
+        noPaths.style.display =
+            visibleCount === 0 ? "block" : "none";
+    }
+
+
+    cards.forEach(function (card) {
+
+        card.addEventListener("click", function () {
+
+            const wasOpen = card.classList.contains("open");
+
+            cards.forEach(function (otherCard) {
+                otherCard.classList.remove("open");
+            });
+
+            if (!wasOpen) {
+                card.classList.add("open");
+            }
+        });
+
+    });
+
+
+    filters.forEach(function (filter) {
+
+        filter.addEventListener("click", function () {
+
+            filters.forEach(function (button) {
+                button.classList.remove("active");
+            });
+
+            filter.classList.add("active");
+
+            currentFilter = filter.dataset.filter;
+
+            filterPaths();
+        });
+
+    });
+
+
+    searchInput.addEventListener("input", filterPaths);
+
+    filterPaths();
+
+});
+</script>
+
+</body>
+</html>

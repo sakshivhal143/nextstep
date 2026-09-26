@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Explorer | NextStep</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .career-tools {
+            max-width: 900px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .career-search {
+            width: 100%;
+            padding: 15px 18px;
+            border: 1px solid #d8dce5;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 18px;
+        }
+
+        .career-search:focus {
+            border-color: #4f46e5;
+        }
+
+        .career-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .career-filter {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            background: #eef0f6;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .career-filter:hover,
+        .career-filter.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .interactive-careers {
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .career-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .career-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .career-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .career-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 12px;
+            background: #eef0f6;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* Center career card headings */
+        .career-card h3 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .career-details {
+            display: none;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid #eee;
+        }
+
+        .career-card.open .career-details {
+            display: block;
+        }
+
+        /* Center headings inside opened cards */
+        .career-details h4 {
+            margin-top: 15px;
+            margin-bottom: 7px;
+            text-align: center;
+        }
+
+        .career-details ul {
+            padding-left: 20px;
+        }
+
+        .career-details li {
+            margin-bottom: 6px;
+        }
+
+        .career-action {
+            margin-top: 18px;
+            font-weight: 600;
+            color: #4f46e5;
+        }
+
+        .no-careers {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .career-bottom {
+            max-width: 1000px;
+            margin: 70px auto;
+            text-align: center;
+            padding: 40px 25px;
+            border-radius: 18px;
+            background: #f5f6ff;
+        }
+
+        @media (max-width: 850px) {
+            .career-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .career-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="nav-logo">NextStep</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/explore">Explore</a>
+        <a href="/paths">Education Paths</a>
+        <a href="/careers" class="active">Careers</a>
+        <a href="/questions">Questions</a>
+    </div>
+</nav>
+
+
+<section class="page-hero">
+    <h1>Explore Careers</h1>
+
+    <p>
+        You don't have to choose a career today.
+        Start by discovering what different careers involve.
+    </p>
+</section>
+
+
+<section class="page-intro">
+    <h2>What sounds interesting?</h2>
+
+    <p>
+        Search for a career area or use the filters below.
+        Open any card to learn more.
+    </p>
+</section>
+
+
+<section class="career-tools">
+
+    <input
+        type="text"
+        id="careerSearch"
+        class="career-search"
+        placeholder="Search careers... e.g. coding, doctor, design"
+    >
+
+    <div class="career-filters">
+
+        <button class="career-filter active" data-filter="all">
+            All
+        </button>
+
+        <button class="career-filter" data-filter="technology">
+            Technology
+        </button>
+
+        <button class="career-filter" data-filter="health">
+            Health
+        </button>
+
+        <button class="career-filter" data-filter="engineering">
+            Engineering
+        </button>
+
+        <button class="career-filter" data-filter="business">
+            Business
+        </button>
+
+        <button class="career-filter" data-filter="creative">
+            Creative
+        </button>
+
+        <button class="career-filter" data-filter="society">
+            Society
+        </button>
+
+        <button class="career-filter" data-filter="science">
+            Science
+        </button>
+
+        <button class="career-filter" data-filter="education">
+            Education
+        </button>
+
+    </div>
+</section>
+
+
+<section class="interactive-careers">
+
+    <div class="career-grid" id="careerGrid">
+
+
+        <!-- Software Developer -->
+        <div class="career-card"
+             data-category="technology"
+             data-search="software developer programmer coding computer technology app website">
+
+            <span class="career-tag">Technology</span>
+
+            <h3>💻 Software Developer</h3>
+
+            <p>
+                Build websites, apps, software and digital systems.
+            </p>
+
+            <div class="career-action">
+                Explore Career →
+            </div>
+
+            <div class="career-details">
+
+                <h4>What do they do?</h4>
+
+                <p>
+                    Software developers use programming and problem-solving
+                    to create and improve software.
+                </p>
+
+                <h4>Skills to explore</h4>
+
+                <ul>
+                    <li>Programming</li>
+                    <li>Logical thinking</li>
+                    <li>Problem-solving</li>
+                    <li>Communication</li>
+                </ul>
+
+                <h4>Education routes</h4>
+
+                <p>
+                    Different routes can lead into technology, including
+                    degree programs, diploma programs and self-directed
+                    learning alongside formal education.
+                </p>
+
+                <h4>Try now</h4>
+
+                <p>
+                    Make a simple webpage or start learning beginner
+                    programming.
+                </p>
+
+            </div>
+        </div>
+
+
+        <!-- Doctor -->
+        <div class="career-card"
+             data-category="health"
+             data-search="doctor medicine healthcare medical biology hospital">
+
+            <span class="career-tag">Health</span>
+
+            <h3>🩺 Doctor</h3>
+
+            <p>
+                Study medicine and help diagnose and treat health conditions.
+            </p>
+
+            <div class="career-action">
+                Explore Career →
+            </div>
+
+            <div class="career-details">
+
+                <h4>What does it involve?</h4>
+
+                <p>
+                    Doctors study medicine and work with patients,
+                    diagnosis, treatment and prevention.
+                </p>
+
+                <h4>Useful interests</h4>
+
+                <ul>
+                    <li>Biology</li>
+                    <li>Science</li>
+                    <li>Problem-solving</li>
+                    <li>Communication</li>
+                </ul>
+
+                <h4>Education</h4>
+
+                <p>
+                    Medical careers have specific education and professional
+                    requirements that depend on the country and program.
+                </p>
+
+                <h4>Try now</h4>
+
+                <p>
+                    Explore human biology and learn how different body
+                    systems work.
+                </p>
+
+            </div>
+        </div>
+
+
+        <!-- Engineer -->
+        <div class="career-card"
+             data-category="engineering"
+             data-search="engineer engineering mechanical electrical civil computer technology machines">
+
+            <span class="career-tag">Engineering</span>
+
+            <h3>⚙️ Engineer</h3>
+
+            <p>
+                Use science and mathematics to design and solve practical
+                problems.
+            </p>
+
+            <div class="career-action">
+                Explore Career →
+            </div>
+
+            <div class="career-details">
+
+                <h4>Different areas</h4>
+
+                <ul>
+                    <li>Computer Engineering</li>
+                    <li>Mechanical Engineering</li>
+                    <li>Electrical Engineering</li>
+                    <li>Civil Engineering</li>
+                    <li>Electronics</li>
+                </ul>
+
+                <h4>Skills to explore</h4>
+
+                <p>
+                    Mathematics, problem-solving, design, experimentation
+                    and technical thinking.
+                </p>
+
+                <h4>Try now</h4>
+
+                <p>
+                    Build a small project, experiment with basic electronics
+                    or learn beginner programming.
+                </p>
+
+            </div>
+        </div>
+
+
+        <!-- Business & Finance -->
+        <div class="career-card"
+             data-category="business"
+             data-search="business finance accountant accounting banker economics management marketing">
+
+            <span class="career-tag">Business</span>
+
+            <h3>💼 Business &amp; Finance</h3>
+
+            <p>
+                Work with money, organizations, markets and business decisions.
+            </p>
+
+            <div class="career-action">
+                Explore Career →
+            </div>
+
+            <div class="career-details">
+
+                <h4>Possible areas</h4>
+
+                <ul>
+                    <li>Accounting</li>
+                    <li>Finance</li>
+                    <li>Banking</li>
+                    <li>Marketing</li>
+                    <li>Management</li>
+                </ul>
+
+                <h4>Skills to explore</h4>
+
+                <p>
+                    Numeracy, communication, organization, analysis and
+                    understanding how businesses operate.
+                </p>
+
+                <h4>Try now</h4>
+
+                <p>
+                    Learn how a small business earns, spends and manages money.
+                </p>
+
+            </div>
+        </div>
+
+
+        <!-- Designer -->
+        <div class="career-card"
+             data-category="creative"
+             data-search="designer graphic design ui ux animation artist photography video fashion">
+
+            <span class="career-tag">Creative</span>
+
+            <h3>🎨 Designer</h3>
+
+            <p>
+                Solve problems through visuals, creativity and design.
+            </p>
+
+            <div class="career-action">
+                Explore Career →
+            </div>
+
+            <div class="career-details">
+
+                <h4>Possible areas</h4>
+
+                <ul>
+                    <li>Graphic Design</li>
+                    <li>UI/UX Design</li>
+                    <li>Animation</li>
+                    <li>Product Design</li>
+                    <li>Fashion Design</li>
+                </ul>
+
+                <h4>Skills to explore</h4>
+
+                <p>
+                    Creativity, observation, visual communication,
+                    design tools and problem-solving.
+                </p>
+
+                <h4>Try now</h4>
+
+                <p>
+                    Design a poster, app screen or simple webpage layout.
+                </p>
+
+            </div>
+        </div>
+
+
+        <!-- Law & Society -->
+        <div class="career-card"
+             data-category="society"
+             data-search="law lawyer legal society government public service politics communication">
+
+            <span class="career-tag">Society</span>
+
+            <h3>⚖️ Law &amp; Society</h3>
+
+            <p>
+                Explore careers connected with law, society and public systems.
+            </p>
+
+            <div class="career-action">
+                Explore Career →
+            </div>
+
+            <div class="career-details">
+
+                <h4>Possible areas</h4>
+
+                <ul>
+                    <li>Law</li>
+                    <li>Public administration</li>
+                    <li>Social research</li>
+                    <li>Policy-related work</li>
+                    <li>Communication</li>
+                </ul>
+
+                <h4>Skills to explore</h4>
+
+                <p>
+                    Reading, writing, research, reasoning and communication.
+                </p>
+
+                <h4>Try now</h4>
+
+                <p>
+                    Research a social issue and explain the different
+                    perspectives surrounding it.
+                </p>
+
+            </div>
+        </div>
+
+
+        <!-- Scientist -->
+        <div class="career-card"
+             data-category="science"
+             data-search="scientist research biology chemistry physics laboratory science researcher">
+
+            <span class="career-tag">Science</span>
+
+            <h3>🔬 Scientist &amp; Researcher</h3>
+
+            <p>
+                Ask questions, investigate evidence and develop knowledge.
+            </p>
+
+            <div class="career-action">
+                Explore Career →
+            </div>
+
+            <div class="career-details">
+
+                <h4>Possible areas</h4>
+
+                <ul>
+                    <li>Physics</li>
+                    <li>Chemistry</li>
+                    <li>Biology</li>
+                    <li>Environmental science</li>
+                    <li>Data and scientific research</li>
+                </ul>
+
+                <h4>Skills to explore</h4>
+
+                <p>
+                    Curiosity, mathematics, observation, experimentation
+                    and careful analysis.
+                </p>
+
+                <h4>Try now</h4>
+
+                <p>
+                    Pick a question and research it using reliable sources.
+                </p>
+
+            </div>
+        </div>
+
+
+        <!-- Teacher -->
+        <div class="career-card"
+             data-category="education"
+             data-search="teacher education teaching professor tutor school learning">
+
+            <span class="career-tag">Education</span>
+
+            <h3>📚 Teacher &amp; Educator</h3>
+
+            <p>
+                Help people understand ideas and develop new skills.
+            </p>
+
+            <div class="career-action">
+                Explore Career →
+            </div>
+
+            <div class="career-details">
+
+                <h4>What can educators do?</h4>
+
+                <p>
+                    Educators can teach subjects, create learning materials,
+                    mentor students and work in different learning environments.
+                </p>
+
+                <h4>Skills to explore</h4>
+
+                <ul>
+                    <li>Communication</li>
+                    <li>Patience</li>
+                    <li>Subject knowledge</li>
+                    <li>Explaining concepts</li>
+                </ul>
+
+                <h4>Try now</h4>
+
+                <p>
+                    Pick something you understand well and try explaining
+                    it clearly to someone else.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="no-careers" id="noCareers">
+
+        <h3>No careers found</h3>
+
+        <p>
+            Try another search term or choose a different category.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="career-bottom">
+
+    <h2>Not sure what interests you?</h2>
+
+    <p>
+        That's exactly what exploration is for.
+        Take the discovery questionnaire and see which areas
+        connect with your interests.
+    </p>
+
+    <br>
+
+    <a href="/explore" class="btn btn-primary">
+        Take the Discovery Quiz
+    </a>
+
+    <br><br>
+
+    <a href="/paths" class="btn btn-secondary">
+        Explore Education Paths
+    </a>
+
+</section>
+
+
+<footer class="footer">
+
+    <p>
+        © 2026 NextStep — Your future starts with your next step.
+    </p>
+
+</footer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cards = document.querySelectorAll(".career-card");
+    const filters = document.querySelectorAll(".career-filter");
+    const searchInput = document.getElementById("careerSearch");
+    const noCareers = document.getElementById("noCareers");
+
+    let currentFilter = "all";
+
+
+    function filterCareers() {
+
+        const searchText =
+            searchInput.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+
+        cards.forEach(function (card) {
+
+            const category = card.dataset.category;
+
+            const searchableText =
+                card.dataset.search.toLowerCase();
+
+
+            const categoryMatch =
+                currentFilter === "all" ||
+                category === currentFilter;
+
+
+            const searchMatch =
+                searchText === "" ||
+                searchableText.includes(searchText);
+
+
+            if (categoryMatch && searchMatch) {
+
+                card.style.display = "block";
+                visibleCount++;
+
+            } else {
+
+                card.style.display = "none";
+                card.classList.remove("open");
+
+            }
+
+        });
+
+
+        noCareers.style.display =
+            visibleCount === 0 ? "block" : "none";
+    }
+
+
+    cards.forEach(function (card) {
+
+        card.addEventListener("click", function () {
+
+            const wasOpen =
+                card.classList.contains("open");
+
+
+            cards.forEach(function (otherCard) {
+                otherCard.classList.remove("open");
+            });
+
+
+            if (!wasOpen) {
+                card.classList.add("open");
+            }
+
+        });
+
+    });
+
+
+    filters.forEach(function (filter) {
+
+        filter.addEventListener("click", function () {
+
+            filters.forEach(function (button) {
+                button.classList.remove("active");
+            });
+
+
+            filter.classList.add("active");
+
+
+            currentFilter =
+                filter.dataset.filter;
+
+
+            filterCareers();
+
+        });
+
+    });
+
+
+    searchInput.addEventListener(
+        "input",
+        filterCareers
+    );
+
+
+    filterCareers();
+
+});
+</script>
+
+</body>
+</html>
+
+
+
+
